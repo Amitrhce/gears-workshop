@@ -1,0 +1,15 @@
+dev.gearsworkshop.cloud:80 {
+    @http {
+        header "X-Forwarded-Proto" "http"
+    }
+    templates
+    file_server {
+        root /var/lib/caddy
+    }
+    redir @http "https://{host}{uri}"
+    respond /api/hostname "{system.hostname}"
+}
+
+health.gearsworkshop.cloud:80 {
+    respond /healthz "OK"
+}

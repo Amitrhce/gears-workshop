@@ -1,0 +1,21 @@
+---
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: caddy-cert
+spec:
+  domains:
+    - api.gearsworkshop.cloud
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: caddy-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: caddy
+    networking.gke.io/managed-certificates: caddy-cert
+spec:
+  backend:
+    serviceName: caddy-service
+    servicePort: http

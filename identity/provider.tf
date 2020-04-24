@@ -1,0 +1,1 @@
+provider "gsuite" {} // https://github.com/DeviaVir/terraform-provider-gsuite
